@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restauracja Wszystkie Smak</title>
+    <link rel="stylesheet" href="css\styl_1.css">
+</head>
+<body>
+    <header>
+        <h1>Witamy w restauracji „Wszystkie Smaki”</h1>
+    </header>
+
+    <div class="oba">
+    <div class="lewy">
+        <img src="menu.jpg" alt="Nasze dania">
+    </div>
+    <div class="prawy">
+        <h4>U nas dobrze zjesz!</h4>
+        <ol>
+            <li>Obiady od 40zł</li>
+            <li>Przekąski od 10zł</li>
+            <li>Kolacje od 20zł</li>
+        </ol>
+    </div>
+    </div>
+    <div class="dolny">
+        <h2>Zarezerwuj stolik on-line</h2>
+        <form action="rezerwacja.php" method="post" >
+            <label for="date">Data (format rrrr-mm-dd):</label><br>
+            <input type="date" name="date"><br>
+            <label for="wiek">Ile osób?</label><br>
+            <input type="number" name="wiek" ><br>
+            <label for="telefon">Twój numer telefonu:</label><br>
+            <input type="text"><br>
+            <input type="checkbox">Zgadzam się na przetwarzanie moich danych osobowych<br>
+            <button type="reset">WYCZYŚĆ
+            <button type="submit">REZERWUJ
+        </form>
+    </div>
+    <footer>
+        <h5>Stronę internetową opracował: Marcin Bartyzel <i>310312049131</i></h5>
+    </footer>
+
+
+</body>
+</html>
