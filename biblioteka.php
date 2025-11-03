@@ -1,70 +1,68 @@
+<?php
+    $conn = new mysqli("localhost","root","","biblioteka");
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Biblioteka publiczna</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Biblioteka publiczna</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Biblioteka w Książkowicach Wielkich</h1>
+        </header>
+        <div id="lewy">
+            <h3>Polecamy dzieła autorów:</h3>
+            <ol>
+                <?php
+                    $sql = "SELECT imie, nazwisko FROM autorzy ORDER BY nazwisko;";
+                    $result = $conn->query($sql);
 
-    <header>
-        <h1>Biblioteka w Książkowicach Wielkich</h1>
-    </header>
+                    while($row = $result -> fetch_array()) 
+                        {  echo "<li>$row[0] $row[1]</li>"; }
+                ?>
+            </ol>
+        </div>
 
-    <div id="lewy">
-        <h3>Polecamy dzieła autorów:</h3>
-        <ol>
-        <?php
+        <div id="srodkowy">
+            <h3>ul. Czytelnicza 25, Książkowice Wielkie</h3>
+            <a href="mailto:sekretariat@biblioteka.pl"><p>Napisz do nas</p></a>
+            <img src="biblioteka1.png" alt="książki">
+        </div>
+        <div id="prawygora">
+            <h3>Dodaj czytelnika</h3>
+            <form action="biblioteka.php" method="post">
+                <label for="imie">imię: </label>
+                <input type="text" name="imie" id="imie"><br>
+                <label for="imie">nazwisko: </label>
+                <input type="text" name="nazwisko" id="nazwisko"><br>
+                <label for="symbol">symbol: </label>
+                <input type="number" name="symbol" id="symbol"><br>
+                <button type="submit" name="dodaj">DODAJ</button>
+            </form>
+        </div>
+        <div id="prawydol">
+            <?php
+                if(isset($_POST["dodaj"]) && isset($_POST["imie"]) && isset($_POST["nazwisko"])) {
+                    $imie = $_POST["imie"];
+                    $nazwisko = $_POST["nazwisko"];
+                    $symbol = $_POST["symbol"];
+                    $sql = "INSERT INTO `czytelnicy`(`imie`, `nazwisko`, `kod`) VALUES ('$imie', '$nazwisko', '$symbol');";
+                    $result = $conn->query($sql);
 
-        $conn = new mysqli("localhost", "root", "", "biblioteka");
-        $sql = "SELECT imie, nazwisko FROM autorzy ORDER BY nazwisko ASC";
-        $result = $conn->query($sql);
-        while($row = $result->fetch_assoc()){
-            echo "<li>".$row['imie']." ".$row['nazwisko']."</li>";
-        }
-        ?>
-        </ol>
-    </div>
-
-    <div id="srodek">
-        <h3>ul. Czytelnicza&nbsp;25, Książkowice&nbsp;Wielkie</h3>
-        <p><a href="mailto:sekretariat@biblioteka.pl">Napisz do nas</a></p>
-        <img src="biblioteka1.png" alt="książki">
-    </div>
-
-    <div id="prawy-gorny">
-        <h3>Dodaj czytelnika</h3>
-        <form method="post" action="biblioteka.php">
-            imię: <input type="text" name="imie"><br>
-            nazwisko: <input type="text" name="nazwisko"><br>
-            symbol: <input type="number" name="symbol"><br>
-            <input type="submit" value="DODAJ">
-        </form>
-        
-    </div>
-
-    <div id="prawy-dol">
-        <?php
-            if (!empty($_POST['imie']) && !empty($_POST['nazwisko']) && !empty($_POST['symbol'])) {
-                $imie = $_POST['imie'];
-                $nazwisko = $_POST['nazwisko'];
-                $symbol = $_POST['symbol'];
-
-                $sql = "INSERT INTO czytelnicy (imie, nazwisko, kod) VALUES ('$imie', '$nazwisko', '$symbol')";
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p>Czytelnik <strong>$imie $nazwisko</strong> został(a) dodany do bazy danych.</p>";
-                } else {
-                    echo "<p>Wystąpił błąd podczas dodawania czytelnika.</p>";
+                    echo "Czytelnik $imie $nazwisko został(a) dodany do bazy danych";
                 }
-            } else {
-                echo "<p>Brak danych do wyświetlenia – wypełnij formularz powyżej.</p>";
-            }
-        ?>
-    </div>
+            ?>
+        </div>
 
-    <footer>
-        <p>Projekt strony: 000000000000</p>
-    </footer>
-
-</body>
+        <footer>
+            <p>Projekt strony: <a>Wiktor Oczkowski</a></p>
+        </footer>
+    </body>
 </html>
+<?php
+    $conn -> close();
+?>
