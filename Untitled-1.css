@@ -1,0 +1,13 @@
+<style>
+.solid {border: solid 2px red;}
+.dotted {border-style: dotted;}
+.dashed {border: dashed;}
+.dashed {border-bottom-style: dashed;}
+.double {border:double;}
+.double {border:double;
+        border-radius: 10px;}
+</style>
+<p class="solid">solid</p>
+<p class="dotted">dotted</p>
+<p class="dashed">dashed</p>
+<p class="double">dobule</p>
