@@ -1,0 +1,16 @@
+<form >
+    <label>
+        <input type="number" required>
+        <input type="submit" value="wyslij">
+        <input type="date"><br>1
+        <input type="range" min="1" max="100" id="zakres">100
+    </label>
+</form>
+<p id="wynik"></p>
+<script>
+    let zakres = document.querySelector("#zakres");
+    zakres.addEventListener("change",wybierz);
+    function wybierz(){
+        document.querySelector("#wynik").innerHTML=zakres.value;
+    }
+</script>
