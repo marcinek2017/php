@@ -1,0 +1,8 @@
+<p>wyszkukiwanie obrazka *.gif</p>
+
+<script>
+    let tekst="ikona jest w logo.gif"
+    var gifRegex=/\S*\.gif/i;
+    let position=tekst.search(gifRegex)
+    document.write(tekst.slice(position));
+</script>
